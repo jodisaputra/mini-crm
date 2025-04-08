@@ -55,17 +55,18 @@
                                                class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-indigo-900 dark:text-indigo-300 dark:hover:bg-indigo-800 transition">
                                                 {{ __('Edit') }}
                                             </a>
-
-                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                  class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                        class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800 transition"
-                                                        onclick="return confirm('Are you sure you want to delete this user?')">
-                                                    {{ __('Delete') }}
-                                                </button>
-                                            </form>
+                                            @if($user->id != \Illuminate\Support\Facades\Auth::user()->id)
+                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                      class="inline-block">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                            class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:bg-red-900 dark:text-red-300 dark:hover:bg-red-800 transition"
+                                                            onclick="return confirm('Are you sure you want to delete this user?')">
+                                                        {{ __('Delete') }}
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
